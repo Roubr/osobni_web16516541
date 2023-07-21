@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>FFmpeg příkazy</title>
+</head>
+<body>
+    <h1 class="nadpis-ffmpeg">Zde jsou mé nejpoužívanější FFmpeg příkazy:</h1>
+    <br>
+    <h3>Základní přidání audia k videu a naopak: <br> 
+        ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a copy cestaknovemusouboru\soubor.pripona </h3>
+    
+    <h3>Kopírování videa, enkódování DTS audia s datovým tokem 1536 kbps: <br> 
+        ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a dca strict-2 -b:a 1536k cestaknovemusouboru\soubor.pripona</h3>
+    
+    <h3>Kopírování videa, enkódování Dolby Digital audia s datovým tokem 640 kbps: <br> 
+        ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a ac3 -b:a 640k cestaknovemusouboru\soubor.pripona </h3>
+    
+    <h3>Kopírování videa, enkódování Dolby Digital Plus audia s datovým tokem 1536 kbps: <br>
+        ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a eac3 -b:a 1536k cestaknovemusouboru\soubor.pripona </h3>
+    
+    <h3>Enkódování videa na H.264 kodek s datovým tokem 35000 kbps (rozlišení 1920x1080/800 progresivní), kopírování audia: <br>
+        ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v libx264 -b:v 35000k -preset medium -c:a copy cestaknovemusouboru\soubor.pripona </h3>
+    
+    <h3>Enkódování videa na H.264 kodek s datovým tokem 120000 kbps (rozlišení 3840x2160/1600 progresivní), kopírování audia: <br>
+        ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v libx264 -b:v 120000k -preset slow -c:a copy cestaknovemusouboru\soubor.pripona </h3>
+    
+    <br>
+    <h1 class="ffmpeg-end">Tyto příkazy lze mezi sebou kombinovat.</h1>  
+</body>
+</html>
