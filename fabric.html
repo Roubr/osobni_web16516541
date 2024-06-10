@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Instalace Fabric</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h3 {
+            text-align: center;
+        }
+        .command-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .command-list li {
+            font-size: 1.2em;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instalace Fabric</h1>
+        <div class="category">
+            <h3>Instalace</h3>
+            <ul class="command-list">
+                <li>1. Nastavit Linux (nejlépe Debiana/Ubuntu)</li>
+                <li>2. sudo apt update</li>
+                <li>3. sudo apt upgrade</li>
+                <li>4. git clone https://github.com/danielmiessler/fabric.git</li>
+                <li>5. cd fabric</li>
+                <li>6. sudo apt install pipx</li>
+                <li>7. pipx install .</li>
+                <li>8. pipx ensurepath</li>
+                <li>9. source ~/.bashrc</li>
+                <li>10. fabric --setup</li>
+                <li>10.1 Přidat YouTube API klíč</li>
+            </ul>
+        </div>
+        <div class="category">
+            <h3>Použití</h3>
+            <ul class="command-list">
+                <li>yt --transcript odkaz_na_yt_video | fabric --model llama3:latest -sp extract_wisdom</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
