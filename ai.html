@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Instalace WSL a AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h3 {
+            text-align: center;
+        }
+        .command-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .command-list li {
+            font-size: 1.2em;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instalace WSL a AI</h1>
+        <div class="category">
+            <h3>Zprovoznění Linuxu a AI na Windows pomocí WSL</h3>
+            <ul class="command-list">
+                <li>1. Otevřít terminál</li>
+                <li>2. `wsl --install debian` *dále nastavit uživ. jméno a heslo*</li>
+                <li>3. `sudo apt update`</li>
+                <li>4. `sudo apt upgrade`</li>
+                <li>5. `curl -fsSL https://ollama.com/install.sh | sh`</li>
+                <li>6. `ollama pull llama3:latest`</li>
+                <li>7. `ollama run llama3:latest`</li>
