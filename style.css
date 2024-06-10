@@ -1,42 +1,110 @@
-.nadpis-main {
-     text-align: center;
-}
-
-.nadpis-ffmpeg {
+/* Společná třída pro středování textu */
+.text-center {
     text-align: center;
 }
 
-.ffmpeg-end {
+/* Nadpisy */
+.nadpis-main,
+.nadpis-ffmpeg,
+.ffmpeg-end,
+.nadpis-linux,
+.linux-prikazy-nadpis {
     text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
 }
 
-.warning {
-    color:red;
+h3, h4 {
     text-align: center;
+    margin: 20px 0;
 }
-
 
 h3 {
     color: red;
-    text-align: center;
+    font-size: 2em; /* Zvýšená velikost fontu pro podnadpisy */
 }
 
 h4 {
-    text-align: center;
+    color: #333;
+    font-size: 1.2em; /* Velikost fontu pro příkazy */
 }
 
-.nadpis-linux {
-    text-align: center;
-}
-
-.linux-prikazy-nadpis {
-    text-align: center;
-}
-
+/* Varování */
+.warning,
 .linux-varovani {
     text-align: center;
+    color: red;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #ffe6e6;
+    border: 1px solid red;
+    border-radius: 5px;
 }
 
+/* Specifické styly pro linux příkazy */
 .linux-prikazy {
     text-align: center;
+    font-family: monospace;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Stylování tlačítek */
+.btn {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #28a745; /* Nová barva */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #218838; /* Nová barva pro hover */
+}
+
+/* Kontejner pro centrální obsah */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Kontejner pro tlačítka */
+.button-container {
+    text-align: center;
+}
+
+/* Kategorie */
+.category h3 {
+    color: red;
+    font-size: 2em; /* Zvýšená velikost fontu pro podnadpisy */
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.command-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.command-list li {
+    font-size: 1.2em; /* Velikost fontu pro příkazy */
+    padding: 5px 0;
 }
