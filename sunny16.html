@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sunny 16 Kalkulačka - Libor Martínek</title>
+</head>
+<body class="sunny16-page">
+    <div class="sunny16-container">
+        <header class="sunny16-header">
+            <h1>Sunny 16 Kalkulačka</h1>
+            <p>Perfektní expozice pro fotografii na 35mm film bez expozimetru</p>
+        </header>
+        
+        <div class="sunny16-film-strip">
+            <div class="sunny16-film-frame"></div>
+            <div class="sunny16-film-frame"></div>
+            <div class="sunny16-film-frame"></div>
+            <div class="sunny16-film-frame"></div>
+            <div class="sunny16-film-frame"></div>
+        </div>
+        
+        <div class="sunny16-content">
+            <div class="sunny16-calculator">
+                <h2>Vypočítat expozici</h2>
+                <div class="sunny16-form-group">
+                    <label for="iso" class="sunny16-label">Citlivost filmu (ISO)</label>
+                    <select id="iso" class="sunny16-select">
+                        <option value="25">ISO 25 (Velmi pomalý film)</option>
+                        <option value="50">ISO 50 (Pomalý film)</option>
+                        <option value="100" selected>ISO 100 (Střední rychlost)</option>
+                        <option value="200">ISO 200</option>
+                        <option value="400">ISO 400 (Rychlý film)</option>
+                        <option value="800">ISO 800 (Velmi rychlý)</option>
+                        <option value="1600">ISO 1600 (Extrémně rychlý)</option>
+                    </select>
+                </div>
+                
+                <div class="sunny16-form-group">
+                    <label for="lighting" class="sunny16-label">Světelné podmínky</label>
+                    <select id="lighting" class="sunny16-select">
+                        <option value="sunny">Slunečno (Ostré stíny)</option>
+                        <option value="slight">Mírně zataženo (Měkké stíny)</option>
+                        <option value="overcast">Zataženo (Žádné stíny)</option>
+                        <option value="heavy">Silně zataženo (Tmavé mraky)</option>
+                        <option value="sunset">Východ/západ slunce</option>
+                        <option value="shade">Stín (Předmět ve stínu)</option>
+                    </select>
+                </div>
+                
+                <button id="calculate-btn" class="sunny16-calc-btn">Vypočítat expozici</button>
+                
+                <div class="sunny16-result">
+                    <h3>Doporučené nastavení</h3>
+                    <div class="sunny16-settings" id="exposure-result">f/16 na 1/125s</div>
+                    <p>Pro ISO <span id="result-iso">100</span> při <span id="result-condition">slunečném dni</span></p>
+                    
+                    <!-- Upravený tip o přeexponování s lepší čitelností -->
+                    <div class="sunny16-note">
+                        <strong>Tip pro filmové fotografy:</strong> Pro jistotu exponujte i s <strong>+1 EV</strong> (přeexponování).<br>
+                        Film lépe snáší přeexponování než podexponování.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ... zbytek kódu ... -->
+        </div>
+        
+        <footer class="sunny16-footer">
+            <p>Sunny 16 Kalkulačka pro začínající filmové fotografy | Vytvořil Libor Martínek</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
