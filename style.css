@@ -108,3 +108,277 @@ h4 {
     font-size: 1.2em; /* Velikost fontu pro příkazy */
     padding: 5px 0;
 }
+
+/* ===== SUNNY 16 KALKULAČKA ===== */
+.sunny16-page {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.sunny16-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.sunny16-header {
+    background: #2c3e50;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.sunny16-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sunny16-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #ecf0f1;
+}
+
+.sunny16-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.sunny16-calculator {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.sunny16-explanation {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .sunny16-content {
+        flex-direction: column;
+    }
+    .sunny16-explanation {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+}
+
+.sunny16-form-group {
+    margin-bottom: 25px;
+}
+
+.sunny16-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.sunny16-select, .sunny16-input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: border-color 0.3s;
+}
+
+.sunny16-select:focus, .sunny16-input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.sunny16-calc-btn {
+    background: linear-gradient(to right, #3498db, #2c3e50);
+    color: white;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sunny16-calc-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sunny16-calc-btn:active {
+    transform: translateY(0);
+}
+
+.sunny16-result {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sunny16-result h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #f8f9fa;
+}
+
+.sunny16-settings {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 15px 0;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sunny16-explanation h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+}
+
+.sunny16-explanation p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.sunny16-rule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sunny16-rule-table th, .sunny16-rule-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.sunny16-rule-table th {
+    background-color: #3498db;
+    color: white;
+}
+
+.sunny16-rule-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.sunny16-rule-table tr:hover {
+    background-color: #e3f2fd;
+}
+
+.sunny16-footer {
+    text-align: center;
+    padding: 20px;
+    background: #2c3e50;
+    color: #ecf0f1;
+    font-size: 0.9rem;
+}
+
+.sunny16-film-strip {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 15px 0;
+    overflow-x: auto;
+}
+
+.sunny16-film-frame {
+    width: 80px;
+    height: 60px;
+    background: #2c3e50;
+    margin: 0 5px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.sunny16-film-frame:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -5px;
+    height: 100%;
+    width: 10px;
+    background: #1a1a1a;
+}
+
+.sunny16-film-frame:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -5px;
+    height: 100%;
+    width: 10px;
+    background: #1a1a1a;
+}
+
+.sunny16-note {
+    background: #fff9db;
+    padding: 15px;
+    border-left: 4px solid #f1c40f;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.sunny16-back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #3498db, #2c3e50);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.sunny16-back-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Upravený styl pro tip v výsledku */
+.sunny16-result .sunny16-note {
+    background: rgba(255, 255, 255, 0.15); /* Průhledné bílé pozadí */
+    color: #ffd700; /* Zlatá barva textu pro lepší čitelnost */
+    border-left: 4px solid #ffd700; /* Zlatý levý okraj */
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+.sunny16-result .sunny16-note strong {
+    color: #ffffff; /* Bílá pro zvýrazněný text */
+    font-weight: 600;
+}
