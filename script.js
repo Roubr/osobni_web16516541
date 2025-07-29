@@ -75,14 +75,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 aperture = 11;
                 break;
             case 'overcast':
-                aperture = 8;
+                aperture = 5.6;
                 break;
             case 'heavy':
                 aperture = 5.6;
                 break;
             case 'sunset':
             case 'shade':
-                aperture = 4;
+                aperture = 2.6;
                 break;
             default:
                 aperture = 16;
