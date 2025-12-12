@@ -71,11 +71,7 @@
                     <li><span class="prompt">$</span> <code>git clone https://github.com/danielmiessler/fabric.git</code> <span class="comment"># Stažení repozitáře</span></li>
                     <li><span class="prompt">$</span> <code>cd fabric && pipx install .</code> <span class="comment"># Instalace Fabricu</span></li>
                     <li><span class="prompt">$</span> <code>fabric --setup</code> <span class="comment"># Nastavení (API klíče pro OpenAI / YouTube)</span></li>
-                    <li style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                        <strong style="color: var(--text-primary);">Praktické využití:</strong><br>
-                        <span class="prompt">$</span> <code>yt --transcript "https://youtube.com/..." | fabric --pattern extract_wisdom</code>
-                        <br><span class="comment"># Vytáhne moudrost z videa a udělá shrnutí</span>
-                    </li>
+                    <li style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;"><strong style="color: var(--text-primary);">Praktické využití:</strong><br><span class="prompt">$</span> <code>yt --transcript "https://youtube.com/..." | fabric --pattern extract_wisdom</code><br><span class="comment"># Vytáhne moudrost z videa a udělá shrnutí</span></li>
                 </ul>
             </div>
 
@@ -87,14 +83,8 @@
                 </p>
                 <ul class="command-list">
                     <li><span class="prompt">$</span> <code>pip install openai-whisper</code> <span class="comment"># Instalace toolu</span></li>
-                    <li>
-                        <span class="prompt">$</span> <code>whisper interview.wav --model medium --language Czech</code>
-                        <br><span class="comment"># Vygeneruje text (.txt) i titulky (.srt) v češtině</span>
-                    </li>
-                    <li>
-                        <span class="prompt">$</span> <code>whisper audio.mp3 --model large --task translate</code>
-                        <br><span class="comment"># Přeloží české audio rovnou do anglických titulků</span>
-                    </li>
+                    <li><span class="prompt">$</span> <code>whisper interview.wav --model medium --language Czech</code><br><span class="comment"># Vygeneruje text (.txt) i titulky (.srt) v češtině</span></li>
+                    <li><span class="prompt">$</span> <code>whisper audio.mp3 --model large --task translate</code><br><span class="comment"># Přeloží české audio rovnou do anglických titulků</span></li>
                 </ul>
             </div>
 
@@ -103,4 +93,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
