@@ -21,7 +21,7 @@
         </div>
 
         <div class="category">
-            <h3>Správa balíčků (Pacman)</h3>
+            <h3>Správa balíčků (Pacman - Arch)</h3>
             <ul class="command-list">
                 <li>sudo pacman -Syu</li>
                 <li>sudo pacman -S názevaplikace</li>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="category">
-            <h3>Správa balíčků (Yay)</h3>
+            <h3>Správa balíčků (Yay - AUR)</h3>
             <ul class="command-list">
                 <li>git clone https://aur.archlinux.org/yay.git</li>
                 <li>cd yay</li>
@@ -42,7 +42,21 @@
         </div>
 
         <div class="category">
-            <h3>Správa balíčků (APT)</h3>
+            <h3>Správa balíčků (Zypper - openSUSE)</h3>
+            <ul class="command-list">
+                <li>sudo zypper dup (Aktualizace Tumbleweed systému)</li>
+                <li>sudo zypper install názevaplikace</li>
+                <li>sudo zypper remove názevaplikace</li>
+                <li>sudo zypper search názevaplikace</li>
+                <li>sudo zypper refresh (Obnovení repozitářů)</li>
+                <li>sudo zypper ar -cfp 90 https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman (Přidání Packman repozitáře)</li>
+                <li>sudo zypper dup --from packman --allow-vendor-change (Přepnutí balíčků na Packman - kodeky)</li>
+                <li>sudo zypper install opi (Nástroj pro instalaci z OBS)</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>Správa balíčků (APT - Debian/Ubuntu)</h3>
             <ul class="command-list">
                 <li>sudo apt install cesta k souboru nebo aplikace z repozitáře</li>
                 <li>sudo apt install git</li>
