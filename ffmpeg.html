@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="ffmpeg.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
 </head>
 <body>
 
@@ -23,42 +24,56 @@
 
     <div class="container">
         <h1>FFmpeg Workflow</h1>
+        
+        <input type="text" id="searchInput" placeholder="Hledat..." class="search-bar">
 
-        <div class="category" style="background: rgba(40, 42, 54, 0.8);">
-            <p style="margin:0; font-style: italic; color: var(--text-secondary);">
-                "FFmpeg je švýcarský nůž pro práci s multimédii. Zde jsou příkazy pro mastering, post-produkci a archivaci."
-            </p>
+        <div id="searchResults" style="display: none;">
+            <h3 style="color: var(--accent);">Nalezené příkazy:</h3>
+            <ul class="command-list" id="resultsList">
+                </ul>
         </div>
 
-        <div class="category">
-            <h3>Video Post-Production (ProRes & H.265)</h3>
-            <ul class="command-list">
-                <li><span class="prompt">$</span> <code>ffmpeg -i input.mov -c:v prores_ks -profile:v 3 -vendor apl0 -bits_per_mb 8000 -pix_fmt yuv422p10le output.mov</code><br><span class="comment"># Převod na Apple ProRes 422 HQ (Standard pro střih a archivaci, 10-bit)</span></li>
-                <li><span class="prompt">$</span> <code>ffmpeg -i input.mp4 -c:v libx265 -crf 20 -preset slow -c:a copy output.mkv</code><br><span class="comment"># Efektivní archivace do H.265 (HEVC). CRF 20 je vizuálně bezztrátové.</span></li>
-                <li><span class="prompt">$</span> <code>ffmpeg -i input.mkv -map 0 -c copy output.mp4</code><br><span class="comment"># Rychlý remux z MKV do MP4 bez rekódování (Pass-through)</span></li>
-            </ul>
-        </div>
+        <div id="originalContent">
 
-        <div class="category">
-            <h3>Audio Engineering (Surround & Loudness)</h3>
-            <ul class="command-list">
-                <li><span class="prompt">$</span> <code>ffmpeg -i video.mkv -vn -c:a pcm_s24le output.wav</code><br><span class="comment"># Extrakce audia do nekomprimovaného 24-bit WAV (Mastering quality)</span></li>
-                <li><span class="prompt">$</span> <code>ffmpeg -i input.wav -c:a flac -compression_level 12 output.flac</code><br><span class="comment"># Archivace audia do FLAC (Bezztrátová komprese)</span></li>
-                <li><span class="prompt">$</span> <code>ffmpeg -i input.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 -ar 48k output.wav</code><br><span class="comment"># EBU R128 Normalizace hlasitosti (Standard pro podcasty a mobilní zařízení)</span></li>
-                <li><span class="prompt">$</span> <code>ffmpeg -i front_L.wav -i front_R.wav -i center.wav -i lfe.wav -i back_L.wav -i back_R.wav -filter_complex "[0:a][1:a][2:a][3:a][4:a][5:a]join=inputs=6:channel_layout=5.1[a]" -map "[a]" output_5.1.wav</code><br><span class="comment"># Muxování 6 mono stop (stems) do jednoho 5.1 surround souboru</span></li>
-                <li><span class="prompt">$</span> <code>ffmpeg -i input.mkv -c:v copy -c:a ac3 -b:a 640k center_mix.mkv</code><br><span class="comment"># Převod audia na Dolby Digital (AC3) s maximálním tokem 640kbps</span></li>
-            </ul>
-        </div>
+            <div class="category" style="background: rgba(40, 42, 54, 0.8);">
+                <p style="margin:0; font-style: italic; color: var(--text-secondary);">
+                    "FFmpeg je švýcarský nůž pro práci s multimédii. Zde jsou příkazy pro mastering, post-produkci a archivaci."
+                </p>
+            </div>
 
-        <div class="category">
-            <h3>Utility & Image Sequences</h3>
-            <ul class="command-list">
-                <li><span class="prompt">$</span> <code>ffmpeg -framerate 24 -i img%04d.png -c:v prores_ks -profile:v 2 output.mov</code><br><span class="comment"># Vytvoření videa z image sequence (např. export z Blenderu/After Effects)</span></li>
-                <li><span class="prompt">$</span> <code>ffmpeg -ss 00:01:30 -to 00:02:00 -i input.mp4 -c copy cut.mp4</code><br><span class="comment"># Bezztrátový střih videa (oříznutí času bez renderu)</span></li>
-            </ul>
-        </div>
+            <div class="category">
+                <h3>Video Post-Production (ProRes & H.265)</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mov -c:v prores_ks -profile:v 3 -vendor apl0 -bits_per_mb 8000 -pix_fmt yuv422p10le output.mov</code><br><span class="comment"># Převod na Apple ProRes 422 HQ (Standard pro střih a archivaci, 10-bit)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mp4 -c:v libx265 -crf 18 -preset slow -c:a copy output.mkv</code><br><span class="comment"># Efektivní archivace do H.265 (HEVC). CRF 18 je vizuálně bezztrátové.</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mkv -map 0 -c copy output.mp4</code><br><span class="comment"># Rychlý remux z MKV do MP4 bez rekódování (Pass-through)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mp4 -vf "scale=-1:1080" -c:v libx264 -crf 23 -preset fast output_1080p.mp4</code><br><span class="comment"># Downscale na 1080p (pro web/náhledy)</span></li>
+                </ul>
+            </div>
 
-    </div>
+            <div class="category">
+                <h3>Audio Engineering (Surround & Loudness)</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>ffmpeg -i video.mkv -vn -c:a pcm_s24le output.wav</code><br><span class="comment"># Extrakce audia do nekomprimovaného 24-bit WAV (Mastering quality)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.wav -c:a flac -compression_level 12 output.flac</code><br><span class="comment"># Archivace audia do FLAC (Bezztrátová komprese)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 -ar 48k output.wav</code><br><span class="comment"># EBU R128 Normalizace hlasitosti (Standard pro podcasty a mobilní zařízení)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i front_L.wav -i front_R.wav -i center.wav -i lfe.wav -i back_L.wav -i back_R.wav -filter_complex "[0:a][1:a][2:a][3:a][4:a][5:a]join=inputs=6:channel_layout=5.1[a]" -map "[a]" output_5.1.wav</code><br><span class="comment"># Muxování 6 mono stop (stems) do jednoho 5.1 surround souboru</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mkv -c:v copy -c:a ac3 -b:a 640k center_mix.mkv</code><br><span class="comment"># Převod audia na Dolby Digital (AC3) s maximálním tokem 640kbps</span></li>
+                </ul>
+            </div>
+
+            <div class="category">
+                <h3>Utility & Image Sequences</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>ffmpeg -framerate 24 -i img%04d.png -c:v prores_ks -profile:v 2 output.mov</code><br><span class="comment"># Vytvoření videa z image sequence (např. export z Blenderu/After Effects)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -ss 00:01:30 -to 00:02:00 -i input.mp4 -c copy cut.mp4</code><br><span class="comment"># Bezztrátový střih videa (oříznutí času bez renderu)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mp4 -vf "setpts=0.5*PTS" output_2x_speed.mp4</code><br><span class="comment"># Zrychlení videa 2x (Timelapse)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mp4 -vf "drawtext=text='%{pts\:hms}':x=100:y=100:fontsize=48:fontcolor=white:box=1:boxcolor=black@0.5" output_tc.mp4</code><br><span class="comment"># Vypálení Timecode do videa (pro náhledy/klienty)</span></li>
+                </ul>
+            </div>
+
+        </div> </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
