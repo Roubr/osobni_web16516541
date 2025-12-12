@@ -1,67 +1,93 @@
 <!DOCTYPE html>
-<html lang="cz">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFmpeg | Post-Production Tools</title>
     <link rel="stylesheet" href="style.css">
-    <title>FFmpeg příkazy</title>
-    <style>
-        .text-center {
-            text-align: center;
-        }
-        .category {
-            margin: 20px 0;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-        .category h3 {
-            color: red;
-            text-transform: uppercase;
-            font-size: 1.5em; /* Zvýšená velikost fontu pro podnadpisy */
-            margin-bottom: 10px;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-        }
-        .command-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .command-list li {
-            font-size: 1.2em; /* Velikost fontu pro příkazy */
-            padding: 5px 0;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="ffmpeg.png">
 </head>
 <body>
-    <h1 class="nadpis-ffmpeg text-center">Zde jsou mé nejpoužívanější FFmpeg příkazy:</h1>
-    <br>
 
-    <div class="category">
-        <h3>Základní příkazy</h3>
-        <ul class="command-list">
-            <li>ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a copy cestaknovemusouboru\soubor.pripona</li>
-        </ul>
+    <nav>
+        <div style="font-family: 'Fira Code', monospace; font-weight:bold;">~/libor-martinek/ffmpeg</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="linux.html">Linux Příkazy</a>
+            <a href="ffmpeg.html" style="color: var(--accent);">FFmpeg</a>
+            <a href="ai.html">AI & Fabric</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>FFmpeg Workflow</h1>
+
+        <div class="category" style="background: rgba(40, 42, 54, 0.8);">
+            <p style="margin:0; font-style: italic; color: var(--text-secondary);">
+                "FFmpeg je švýcarský nůž pro práci s multimédii. Zde jsou příkazy pro mastering, post-produkci a archivaci."
+            </p>
+        </div>
+
+        <div class="category">
+            <h3>Video Post-Production (ProRes & H.265)</h3>
+            <ul class="command-list">
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i input.mov -c:v prores_ks -profile:v 3 -vendor apl0 -bits_per_mb 8000 -pix_fmt yuv422p10le output.mov</code>
+                    <br><span class="comment"># Převod na Apple ProRes 422 HQ (Standard pro střih a archivaci, 10-bit)</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i input.mp4 -c:v libx265 -crf 20 -preset slow -c:a copy output.mkv</code>
+                    <br><span class="comment"># Efektivní archivace do H.265 (HEVC). CRF 20 je vizuálně bezztrátové.</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i input.mkv -map 0 -c copy output.mp4</code>
+                    <br><span class="comment"># Rychlý remux z MKV do MP4 bez rekódování (Pass-through)</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>Audio Engineering (Surround & Loudness)</h3>
+            <ul class="command-list">
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i video.mkv -vn -c:a pcm_s24le output.wav</code>
+                    <br><span class="comment"># Extrakce audia do nekomprimovaného 24-bit WAV (Mastering quality)</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i input.wav -c:a flac -compression_level 12 output.flac</code>
+                    <br><span class="comment"># Archivace audia do FLAC (Bezztrátová komprese)</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i input.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 -ar 48k output.wav</code>
+                    <br><span class="comment"># EBU R128 Normalizace hlasitosti (Standard pro podcasty a mobilní zařízení)</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i front_L.wav -i front_R.wav -i center.wav -i lfe.wav -i back_L.wav -i back_R.wav -filter_complex "[0:a][1:a][2:a][3:a][4:a][5:a]join=inputs=6:channel_layout=5.1[a]" -map "[a]" output_5.1.wav</code>
+                    <br><span class="comment"># Muxování 6 mono stop (stems) do jednoho 5.1 surround souboru</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -i input.mkv -c:v copy -c:a ac3 -b:a 640k center_mix.mkv</code>
+                    <br><span class="comment"># Převod audia na Dolby Digital (AC3) s maximálním tokem 640kbps</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>Utility & Image Sequences</h3>
+            <ul class="command-list">
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -framerate 24 -i img%04d.png -c:v prores_ks -profile:v 2 output.mov</code>
+                    <br><span class="comment"># Vytvoření videa z image sequence (např. export z Blenderu/After Effects)</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>ffmpeg -ss 00:01:30 -to 00:02:00 -i input.mp4 -c copy cut.mp4</code>
+                    <br><span class="comment"># Bezztrátový střih videa (oříznutí času bez renderu)</span>
+                </li>
+            </ul>
+        </div>
+
     </div>
-
-    <div class="category">
-        <h3>Enkódování audia</h3>
-        <ul class="command-list">
-            <li>ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a dca strict-2 -b:a 1536k cestaknovemusouboru\soubor.pripona</li>
-            <li>ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a ac3 -b:a 640k cestaknovemusouboru\soubor.pripona</li>
-            <li>ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v copy -c:a eac3 -b:a 1536k cestaknovemusouboru\soubor.pripona</li>
-        </ul>
-    </div>
-
-    <div class="category">
-        <h3>Enkódování videa</h3>
-        <ul class="command-list">
-            <li>ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v libx264 -b:v 35000k -preset medium -c:a copy cestaknovemusouboru\soubor.pripona</li>
-            <li>ffmpeg -i cestaksouboru\soubor.pripona -i cestaksouboru\soubor.pripona -c:v libx264 -b:v 120000k -preset slow -c:a copy cestaknovemusouboru\soubor.pripona</li>
-        </ul>
-    </div>
-
-    <br>
-    <h1 class="ffmpeg-end text-center">Tyto příkazy lze mezi sebou kombinovat.</h1>  
 </body>
 </html>

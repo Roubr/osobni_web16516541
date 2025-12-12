@@ -1,48 +1,90 @@
 <!DOCTYPE html>
-<html lang="cz">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Machine Learning | Local Workflow</title>
     <link rel="stylesheet" href="style.css">
-    <title>Instalace WSL a AI</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h3 {
-            text-align: center;
-        }
-        .command-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .command-list li {
-            font-size: 1.2em;
-            padding: 5px 0;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <nav>
+        <div style="font-family: 'Fira Code', monospace; font-weight:bold;">~/libor-martinek/ai</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="linux.html">Linux Příkazy</a>
+            <a href="ffmpeg.html">FFmpeg</a>
+            <a href="ai.html" style="color: var(--accent);">AI & Fabric</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>Instalace WSL a AI</h1>
+        <h1>AI Workflow & Tools</h1>
+
+        <div class="category" style="background: rgba(137, 180, 250, 0.1); border-left: 4px solid var(--accent);">
+            <p style="margin:0;">
+                <strong>Proč lokální AI?</strong> Žádné odesílání dat do cloudu, nulová latence, žádné měsíční poplatky.
+                Ideální pro práci s citlivým materiálem (scénáře, hrubé střihy).
+            </p>
+        </div>
+
         <div class="category">
-            <h3>Zprovoznění Linuxu a AI na Windows pomocí WSL</h3>
+            <h3>1. Příprava prostředí (WSL2 / Linux)</h3>
             <ul class="command-list">
-                <li>1. Otevřít terminál</li>
-                <li>2. `wsl --install debian` *dále nastavit uživ. jméno a heslo*</li>
-                <li>3. `sudo apt update`</li>
-                <li>4. `sudo apt upgrade`</li>
-                <li>5. `curl -fsSL https://ollama.com/install.sh | sh`</li>
-                <li>6. `ollama pull llama3:latest`</li>
-                <li>7. `ollama run llama3:latest`</li>
+                <li><span class="prompt">C:\></span> <code>wsl --install</code> <span class="comment"># Instalace defaultního distra (Ubuntu) ve Windows</span></li>
+                <li><span class="prompt">$</span> <code>sudo apt update && sudo apt upgrade</code> <span class="comment"># Aktualizace systému</span></li>
+                <li><span class="prompt">$</span> <code>sudo apt install python3-pip python3-venv ffmpeg</code> <span class="comment"># Základní prerekvizity (Python + FFmpeg)</span></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>2. Ollama (Local LLM Server)</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 10px;">Nejjednodušší způsob, jak rozběhat Llama 3, Mistral nebo Gemma lokálně.</p>
+            <ul class="command-list">
+                <li><span class="prompt">$</span> <code>curl -fsSL https://ollama.com/install.sh | sh</code> <span class="comment"># Instalace Ollama</span></li>
+                <li><span class="prompt">$</span> <code>ollama pull llama3</code> <span class="comment"># Stažení modelu Llama 3 (cca 4.7 GB)</span></li>
+                <li><span class="prompt">$</span> <code>ollama run llama3</code> <span class="comment"># Spuštění chatu v terminálu</span></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>3. Fabric (AI Patterns)</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 10px;">Framework od Daniela Miesslera pro efektivní využívání LLM pomocí "patterns".</p>
+            <ul class="command-list">
+                <li><span class="prompt">$</span> <code>sudo apt install pipx</code> <span class="comment"># Instalace správce balíčků</span></li>
+                <li><span class="prompt">$</span> <code>git clone https://github.com/danielmiessler/fabric.git</code> <span class="comment"># Stažení repozitáře</span></li>
+                <li><span class="prompt">$</span> <code>cd fabric && pipx install .</code> <span class="comment"># Instalace Fabricu</span></li>
+                <li><span class="prompt">$</span> <code>fabric --setup</code> <span class="comment"># Nastavení (API klíče pro OpenAI / YouTube)</span></li>
+                <li style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                    <strong style="color: var(--text-primary);">Praktické využití (YouTube Transkripce):</strong><br>
+                    <span class="prompt">$</span> <code>yt --transcript "https://youtube.com/..." | fabric --pattern extract_wisdom</code>
+                    <br><span class="comment"># Vytáhne moudrost z videa a udělá shrnutí</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h3>4. Whisper (Titulky & Přepis pro Filmaře)</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 10px;">
+                OpenAI Whisper běží lokálně a umí přepsat audio do textu s brutální přesností.
+                Skvělé pro tvorbu titulků k rozhovorům.
+            </p>
+            <ul class="command-list">
+                <li><span class="prompt">$</span> <code>pip install openai-whisper</code> <span class="comment"># Instalace toolu</span></li>
+                <li>
+                    <span class="prompt">$</span> <code>whisper interview.wav --model medium --language Czech</code>
+                    <br><span class="comment"># Vygeneruje text (.txt) i titulky (.srt) v češtině</span>
+                </li>
+                <li>
+                    <span class="prompt">$</span> <code>whisper audio.mp3 --model large --task translate</code>
+                    <br><span class="comment"># Přeloží české audio rovnou do anglických titulků</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>

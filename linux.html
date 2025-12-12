@@ -1,102 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux příkazy</title>
+    <title>Linux Příkazy | Cheat Sheet</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>>_</text></svg>">
 </head>
 <body>
-    <h1 class="linux-prikazy-nadpis">Zde jsou dobré a užitečné příkazy pro Linux:</h1>
-    <h1 class="linux-varovani">Tyto příkazy nemusí fungovat na všech distribucích Linuxu!</h1>
-    <br>
 
-    <div class="linux-prikazy">
-        <div class="category">
-            <h3>Systémové příkazy</h3>
-            <ul class="command-list">
-                <li>cal</li>
-                <li>neofetch</li>
-            </ul>
+    <nav>
+        <div style="font-family: 'Fira Code', monospace; font-weight:bold;">~/libor-martinek/linux</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="linux.html" style="color: var(--accent);">Linux Příkazy</a>
+            <a href="ffmpeg.html">FFmpeg</a>
+            <a href="ai.html">AI & Fabric</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Linux Terminal Cheat Sheet</h1>
+        
+        <input type="text" id="searchInput" placeholder="Search commands (grep, install, mount)..." class="search-bar">
+
+        <div id="searchResults" style="display: none;">
+            <h3 style="color: var(--accent);">Nalezené příkazy:</h3>
+            <ul class="command-list" id="resultsList">
+                </ul>
         </div>
 
-        <div class="category">
-            <h3>Správa balíčků (Pacman - Arch)</h3>
-            <ul class="command-list">
-                <li>sudo pacman -Syu</li>
-                <li>sudo pacman -S názevaplikace</li>
-                <li>sudo pacman -S bluez blueman bluez-utils p7zip unrar tar rsync git neofetch exfat-utils fuse-exfat ntfs-3g flac aria2 curl wget git base-devel</li>
-            </ul>
-        </div>
+        <div id="originalContent">
 
-        <div class="category">
-            <h3>Správa balíčků (Yay - AUR)</h3>
-            <ul class="command-list">
-                <li>git clone https://aur.archlinux.org/yay.git</li>
-                <li>cd yay</li>
-                <li>makepkg -si</li>
-                <li>yay --version</li>
-                <li>yay -S názevaplikace</li>
-                <li>yay -Rs názevaplikace</li>
-            </ul>
-        </div>
+            <div class="category warning-box">
+                <h4 style="margin-top:0; color: var(--danger);">⚠️ Upozornění</h4>
+                <p style="margin-bottom:0;">Příkazy se mohou lišit podle distribuce. Vždy si ověř, co spouštíš!</p>
+            </div>
 
-        <div class="category">
-            <h3>Správa balíčků (Zypper - openSUSE)</h3>
-            <ul class="command-list">
-                <li>sudo zypper dup (Aktualizace Tumbleweed systému)</li>
-                <li>sudo zypper install názevaplikace</li>
-                <li>sudo zypper remove názevaplikace</li>
-                <li>sudo zypper search názevaplikace</li>
-                <li>sudo zypper refresh (Obnovení repozitářů)</li>
-                <li>sudo zypper ar -cfp 90 https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman (Přidání Packman repozitáře)</li>
-                <li>sudo zypper dup --from packman --allow-vendor-change (Přepnutí balíčků na Packman - kodeky)</li>
-                <li>sudo zypper install opi (Nástroj pro instalaci z OBS)</li>
-            </ul>
-        </div>
+            <div class="category">
+                <h3>Služby & Logy (Systemd)</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>sudo systemctl start [sluzba]</code> <span class="comment"># Spustí službu (např. smb, docker)</span></li>
+                    <li><span class="prompt">$</span> <code>sudo systemctl enable --now [sluzba]</code> <span class="comment"># Zapne službu po startu PC</span></li>
+                    <li><span class="prompt">$</span> <code>systemctl status [sluzba]</code> <span class="comment"># Zjistí stav služby</span></li>
+                    <li><span class="prompt">$</span> <code>sudo systemctl restart [sluzba]</code> <span class="comment"># Restart služby</span></li>
+                    <li><span class="prompt">$</span> <code>journalctl -xe</code> <span class="comment"># Zobrazí chybové logy</span></li>
+                    <li><span class="prompt">$</span> <code>journalctl -f</code> <span class="comment"># Live sledování logů (Matrix style)</span></li>
+                </ul>
+            </div>
 
-        <div class="category">
-            <h3>Správa balíčků (APT - Debian/Ubuntu)</h3>
-            <ul class="command-list">
-                <li>sudo apt install cesta k souboru nebo aplikace z repozitáře</li>
-                <li>sudo apt install git</li>
-                <li>sudo apt install build-essential</li>
-                <li>sudo apt install hashcat</li>
-                <li>sudo apt install cupp</li>
-                <li>sudo apt install samba</li>
-            </ul>
-        </div>
+            <div class="category">
+                <h3>openSUSE Tumbleweed (Zypper)</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>sudo zypper dup</code> <span class="comment"># Distro Upgrade (Nutnost pro Tumbleweed)</span></li>
+                    <li><span class="prompt">$</span> <code>sudo zypper in [nazev]</code> <span class="comment"># Instalace balíčku</span></li>
+                    <li><span class="prompt">$</span> <code>sudo zypper rm [nazev]</code> <span class="comment"># Odstranění balíčku</span></li>
+                    <li><span class="prompt">$</span> <code>sudo zypper se [nazev]</code> <span class="comment"># Hledání balíčku</span></li>
+                    <li><span class="prompt">$</span> <code>sudo zypper info [nazev]</code> <span class="comment"># Info o balíčku</span></li>
+                    <li><span class="prompt">$</span> <code>sudo zypper al [nazev]</code> <span class="comment"># Add Lock (Zamknutí verze balíčku)</span></li>
+                    <li><span class="prompt">$</span> <code>sudo zypper in opi</code> <span class="comment"># Instalace OBS Package Installer</span></li>
+                    <li><span class="prompt">$</span> <code>opi codecs</code> <span class="comment"># Kodeky + Vendor change (Packman)</span></li>
+                    <li><span class="prompt">$</span> <code>sudo zypper dup --from packman --allow-vendor-change</code> <span class="comment"># Oprava multimédií</span></li>
+                    <li><span class="prompt">$</span> <code>sudo snapper list</code> <span class="comment"># Seznam BTRFS snapshotů</span></li>
+                    <li><span class="prompt">$</span> <code>sudo snapper rollback [cislo]</code> <span class="comment"># Návrat do funkčního stavu</span></li>
+                </ul>
+            </div>
 
-        <div class="category">
-            <h3>Práce se soubory a adresáři</h3>
-            <ul class="command-list">
-                <li>sudo rm</li>
-                <li>sudo rm -rf</li>
-                <li>sudo rmdir</li>
-                <li>sudo mkdir</li>
-                <li>touch nazevsouboru.pripona</li>
-                <li>sudo nano nazevsouboru</li>
-            </ul>
-        </div>
+            <div class="category">
+                <h3>Arch Linux (Pacman & Yay)</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>sudo pacman -Syu</code> <span class="comment"># Full System Update</span></li>
+                    <li><span class="prompt">$</span> <code>sudo pacman -S [nazev]</code> <span class="comment"># Instalace</span></li>
+                    <li><span class="prompt">$</span> <code>sudo pacman -Rs [nazev]</code> <span class="comment"># Odstranění vč. závislostí</code></li>
+                    <li><span class="prompt">$</span> <code>sudo pacman -Qtdq | sudo pacman -Rns -</code> <span class="comment"># Smazání sirotků</code></li>
+                    <li><span class="prompt">$</span> <code>sudo pacman -Sc</code> <span class="comment"># Vyčištění cache</span></li>
+                    <li><span class="prompt">$</span> <code>yay -Syu</code> <span class="comment"># Update systému i AUR (Yay)</span></li>
+                    <li><span class="prompt">$</span> <code>yay -Yc</code> <span class="comment"># Clean AUR dependencies</span></li>
+                    <li><span class="prompt">$</span> <code>sudo reflector --latest 5 --sort rate --save /etc/pacman.d/mirrorlist</code> <span class="comment"># Aktualizace mirrorů</span></li>
+                </ul>
+            </div>
 
-        <div class="category">
-            <h3>Správa uživatelů a oprávnění</h3>
-            <ul class="command-list">
-                <li>sudo chmod -R 777</li>
-                <li>[nazevsdileneslozky]<br>path = /cesta/k/sdilene/slozce<br>writable = yes<br>guest ok = yes</li>
-                <li>sudo smbpasswd -a uzivatelske_jmeno</li>
-            </ul>
-        </div>
+            <div class="category">
+                <h3>Debian / Ubuntu (APT)</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>sudo apt update && sudo apt upgrade</code> <span class="comment"># Aktualizace</span></li>
+                    <li><span class="prompt">$</span> <code>sudo apt install [nazev]</code> <span class="comment"># Instalace</span></li>
+                    <li><span class="prompt">$</span> <code>sudo apt purge [nazev]</code> <span class="comment"># Kompletní odstranění (Purge config)</span></li>
+                    <li><span class="prompt">$</span> <code>sudo apt autoremove</code> <span class="comment"># Pročištění systému</span></li>
+                    <li><span class="prompt">$</span> <code>sudo add-apt-repository ppa:[nazev]</code> <span class="comment"># Přidání PPA</span></li>
+                    <li><span class="prompt">$</span> <code>sudo dpkg -i [soubor.deb]</code> <span class="comment"># Instalace .deb</span></li>
+                    <li><span class="prompt">$</span> <code>sudo apt --fix-broken install</code> <span class="comment"># Oprava závislostí</span></li>
+                </ul>
+            </div>
 
-        <div class="category">
-            <h3>Speciální příkazy</h3>
-            <ul class="command-list">
-                <li>cupp -i</li>
-                <li>g++ main.cpp -o main</li>
-                <li>gcc main.c -o main</li>
-                <li>g++ $(wx-config --cxxflags) ./main.cpp -o build/mywxapp $(wx-config --libs)</li>
-            </ul>
-        </div>
-    </div>
+            <div class="category">
+                <h3>Disky, NAS & Formátování</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>lsblk</code> <span class="comment"># Strom připojených disků</span></li>
+                    <li><span class="prompt">$</span> <code>sudo fdisk -l</code> <span class="comment"># Detailní info o discích</span></li>
+                    <li><span class="prompt">$</span> <code>sudo mount -t cifs //[ip_adresa]/[share] /mnt/[slozka] -o username=[jmeno],vers=3.0,uid=$(id -u),gid=$(id -g)</code><br><span class="comment"># Připojení NAS (SMB/CIFS) s právy zápisu pro Vašeho uživatele (Fixne "Permission denied")</span></li>
+                    <li><span class="prompt">$</span> <code>sudo mount /dev/sdX1 /mnt/slozka</code> <span class="comment"># Připojení disku</span></li>
+                    <li><span class="prompt">$</span> <code>sudo umount /dev/sdX1</code> <span class="comment"># Odpojení disku</code></li>
+                    <li><span class="prompt">$</span> <code>sudo mkfs.exfat /dev/sdX1</code> <span class="comment"># Formát exFAT (Kamery/Win/Mac)</span></li>
+                    <li><span class="prompt">$</span> <code>sudo mkfs.ext4 /dev/sdX1</code> <span class="comment"># Formát Linux EXT4</span></li>
+                    <li><span class="prompt">$</span> <code>sudo smartctl -a /dev/sdX</code> <span class="comment"># S.M.A.R.T. kontrola zdraví disku</span></li>
+                </ul>
+            </div>
+
+            <div class="category">
+                <h3>Monitoring & Hardware</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>htop</code> <span class="comment"># Správce procesů</span></li>
+                    <li><span class="prompt">$</span> <code>btop</code> <span class="comment"># Moderní dashboard</span></li>
+                    <li><span class="prompt">$</span> <code>nvtop</code> <span class="comment"># GPU Monitor (Nvidia/AMD) - pro Render!</span></li>
+                    <li><span class="prompt">$</span> <code>watch -n 1 sensors</code> <span class="comment"># Teploty CPU/GPU live</span></li>
+                    <li><span class="prompt">$</span> <code>df -h</code> <span class="comment"># Místo na discích</span></li>
+                    <li><span class="prompt">$</span> <code>ncdu</code> <span class="comment"># Analyzátor velikosti složek</span></li>
+                </ul>
+            </div>
+
+            <div class="category">
+                <h3>Soubory & Zálohování</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>ls -lah</code> <span class="comment"># Kompletní výpis</span></li>
+                    <li><span class="prompt">$</span> <code>chmod +x skript.sh</code> <span class="comment"># Spustitelnost</span></li>
+                    <li><span class="prompt">$</span> <code>chown user:group soubor</code> <span class="comment"># Změna vlastníka</span></li>
+                    <li><span class="prompt">$</span> <code>ln -s /cesta/k/originalu link</code> <span class="comment"># Symlink</span></li>
+                    <li><span class="prompt">$</span> <code>find . -name "*.mkv"</code> <span class="comment"># Najít MKV soubory</span></li>
+                    <li><span class="prompt">$</span> <code>grep -r "text" .</code> <span class="comment"># Najít text v souborech</span></li>
+                    <li><span class="prompt">$</span> <code>rsync -avP --delete /zdroj/ /cil/</code> <br><span class="comment"># Zrcadlení dat (Backup)</span></li>
+                    <li><span class="prompt">$</span> <code>tar -czvf archiv.tar.gz slozka/</code> <span class="comment"># Komprese tar.gz</span></li>
+                </ul>
+            </div>
+
+            <div class="category">
+                <h3>Multimédia</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>mediainfo video.mov</code> <span class="comment"># Tech info o videu (kodeky)</span></li>
+                    <li><span class="prompt">$</span> <code>yt-dlp -f "bestvideo+bestaudio" [URL]</code> <span class="comment"># Stažení videa (High Quality)</span></li>
+                    <li><span class="prompt">$</span> <code>ffmpeg -i input.mkv</code> <span class="comment"># Info o videu (FFmpeg)</span></li>
+                </ul>
+            </div>
+
+            <div class="category">
+                <h3>Síť & SSH</h3>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>ip a</code> <span class="comment"># IP adresa</span></li>
+                    <li><span class="prompt">$</span> <code>ping 1.1.1.1</code> <span class="comment"># Ping test</span></li>
+                    <li><span class="prompt">$</span> <code>ssh user@ip_adresa</code> <span class="comment"># SSH připojení</span></li>
+                    <li><span class="prompt">$</span> <code>scp soubor.txt user@ip:/cesta</code> <span class="comment"># Kopírování přes SSH</span></li>
+                    <li><span class="prompt">$</span> <code>nmcli dev wifi list</code> <span class="comment"># Scan Wi-Fi</span></li>
+                    <li><span class="prompt">$</span> <code>ss -tulpn</code> <span class="comment"># Otevřené porty</span></li>
+                </ul>
+            </div>
+
+            <div class="category" style="border: 1px solid var(--accent); background: rgba(137, 180, 250, 0.05);">
+                <h3 style="color: var(--accent);">Bonus: Nostromo Ambience</h3>
+                <p style="color: var(--text-muted); margin-bottom: 10px; font-style: italic;">
+                    "Mother, what's the noise level?"
+                </p>
+                <ul class="command-list">
+                    <li><span class="prompt">$</span> <code>sudo zypper in sox</code> <span class="comment"># Vyžaduje balíček SoX</span></li>
+                    <li><span class="prompt">$</span> <code>play -n synth pinknoise lowpass 80 tremolo 15 .1</code><br><span class="comment"># Generuje hluboké, pulzující dunění motorů Nostroma (Pink Noise + Tremolo)</span></li>
+                </ul>
+            </div>
+
+        </div> </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
