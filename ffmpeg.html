@@ -33,61 +33,32 @@
         <div class="category">
             <h3>Video Post-Production (ProRes & H.265)</h3>
             <ul class="command-list">
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i input.mov -c:v prores_ks -profile:v 3 -vendor apl0 -bits_per_mb 8000 -pix_fmt yuv422p10le output.mov</code>
-                    <br><span class="comment"># Převod na Apple ProRes 422 HQ (Standard pro střih a archivaci, 10-bit)</span>
-                </li>
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i input.mp4 -c:v libx265 -crf 20 -preset slow -c:a copy output.mkv</code>
-                    <br><span class="comment"># Efektivní archivace do H.265 (HEVC). CRF 20 je vizuálně bezztrátové.</span>
-                </li>
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i input.mkv -map 0 -c copy output.mp4</code>
-                    <br><span class="comment"># Rychlý remux z MKV do MP4 bez rekódování (Pass-through)</span>
-                </li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i input.mov -c:v prores_ks -profile:v 3 -vendor apl0 -bits_per_mb 8000 -pix_fmt yuv422p10le output.mov</code><br><span class="comment"># Převod na Apple ProRes 422 HQ (Standard pro střih a archivaci, 10-bit)</span></li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i input.mp4 -c:v libx265 -crf 20 -preset slow -c:a copy output.mkv</code><br><span class="comment"># Efektivní archivace do H.265 (HEVC). CRF 20 je vizuálně bezztrátové.</span></li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i input.mkv -map 0 -c copy output.mp4</code><br><span class="comment"># Rychlý remux z MKV do MP4 bez rekódování (Pass-through)</span></li>
             </ul>
         </div>
 
         <div class="category">
             <h3>Audio Engineering (Surround & Loudness)</h3>
             <ul class="command-list">
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i video.mkv -vn -c:a pcm_s24le output.wav</code>
-                    <br><span class="comment"># Extrakce audia do nekomprimovaného 24-bit WAV (Mastering quality)</span>
-                </li>
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i input.wav -c:a flac -compression_level 12 output.flac</code>
-                    <br><span class="comment"># Archivace audia do FLAC (Bezztrátová komprese)</span>
-                </li>
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i input.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 -ar 48k output.wav</code>
-                    <br><span class="comment"># EBU R128 Normalizace hlasitosti (Standard pro podcasty a mobilní zařízení)</span>
-                </li>
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i front_L.wav -i front_R.wav -i center.wav -i lfe.wav -i back_L.wav -i back_R.wav -filter_complex "[0:a][1:a][2:a][3:a][4:a][5:a]join=inputs=6:channel_layout=5.1[a]" -map "[a]" output_5.1.wav</code>
-                    <br><span class="comment"># Muxování 6 mono stop (stems) do jednoho 5.1 surround souboru</span>
-                </li>
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -i input.mkv -c:v copy -c:a ac3 -b:a 640k center_mix.mkv</code>
-                    <br><span class="comment"># Převod audia na Dolby Digital (AC3) s maximálním tokem 640kbps</span>
-                </li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i video.mkv -vn -c:a pcm_s24le output.wav</code><br><span class="comment"># Extrakce audia do nekomprimovaného 24-bit WAV (Mastering quality)</span></li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i input.wav -c:a flac -compression_level 12 output.flac</code><br><span class="comment"># Archivace audia do FLAC (Bezztrátová komprese)</span></li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i input.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 -ar 48k output.wav</code><br><span class="comment"># EBU R128 Normalizace hlasitosti (Standard pro podcasty a mobilní zařízení)</span></li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i front_L.wav -i front_R.wav -i center.wav -i lfe.wav -i back_L.wav -i back_R.wav -filter_complex "[0:a][1:a][2:a][3:a][4:a][5:a]join=inputs=6:channel_layout=5.1[a]" -map "[a]" output_5.1.wav</code><br><span class="comment"># Muxování 6 mono stop (stems) do jednoho 5.1 surround souboru</span></li>
+                <li><span class="prompt">$</span> <code>ffmpeg -i input.mkv -c:v copy -c:a ac3 -b:a 640k center_mix.mkv</code><br><span class="comment"># Převod audia na Dolby Digital (AC3) s maximálním tokem 640kbps</span></li>
             </ul>
         </div>
 
         <div class="category">
             <h3>Utility & Image Sequences</h3>
             <ul class="command-list">
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -framerate 24 -i img%04d.png -c:v prores_ks -profile:v 2 output.mov</code>
-                    <br><span class="comment"># Vytvoření videa z image sequence (např. export z Blenderu/After Effects)</span>
-                </li>
-                <li>
-                    <span class="prompt">$</span> <code>ffmpeg -ss 00:01:30 -to 00:02:00 -i input.mp4 -c copy cut.mp4</code>
-                    <br><span class="comment"># Bezztrátový střih videa (oříznutí času bez renderu)</span>
-                </li>
+                <li><span class="prompt">$</span> <code>ffmpeg -framerate 24 -i img%04d.png -c:v prores_ks -profile:v 2 output.mov</code><br><span class="comment"># Vytvoření videa z image sequence (např. export z Blenderu/After Effects)</span></li>
+                <li><span class="prompt">$</span> <code>ffmpeg -ss 00:01:30 -to 00:02:00 -i input.mp4 -c copy cut.mp4</code><br><span class="comment"># Bezztrátový střih videa (oříznutí času bez renderu)</span></li>
             </ul>
         </div>
 
     </div>
 </body>
 </html>
+
