@@ -1,64 +1,56 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libor Martínek | Osobní repozitář</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Osobní web - Libor Martínek</title>
 </head>
 <body>
-
-    <nav>
-        <div style="font-family: 'Fira Code', monospace; font-weight:bold;">~/libor-martinek</div>
-        <div>
-            <a href="index.html" style="color: var(--accent);">Home</a>
-            <a href="linux.html">Linux Příkazy</a>
-            <a href="ffmpeg.html">FFmpeg</a>
-            <a href="ai.html">AI & Fabric</a>
-        </div>
-    </nav>
-
     <div class="container">
-        <h1>Vítej v repozitáři</h1>
+        <h1 class="nadpis-main">Osobní web Libora Martínka</h1>
+        <h2 class="warning">Tato stránka obsahuje mé osobní věci - použití na vlastní nebezpečí!</h2>
+        <br>
         
-        <div class="category" style="border-left: 4px solid #ff6b6b; background: rgba(255, 107, 107, 0.1);">
-            <h4 style="margin-top:0; color: #ff6b6b;">⚠️ Upozornění</h4>
-            <p style="margin-bottom:0;">Tato stránka obsahuje mé osobní konfigurace a soubory. Použití je na vlastní nebezpečí!</p>
+        <div class="button-container">
+            <button class="btn" onclick="window.location.href='ffmpeg.html'">FFmpeg příkazy</button>
+            <button class="btn" onclick="window.location.href='ai.html'">AI</button>
+            <button class="btn" onclick="window.location.href='fabric.html'">Fabric</button>
+        </div>
+        <br><br>
+
+        <div class="soubory">
+            <h4>Toto jsou mé osobní soubory. Použití na vlastní nebezpečí!</h4>
+            <br>
+            <a href="https://drive.google.com/file/d/1mFYmLob1cbauOaszqxaUAUebi0iqzteM/view?usp=drive_link">Adobe Premiere Pro</a> <br>
+            <a href="https://drive.google.com/file/d/1CZwihP8Y7EolMs3dKRqJaDot4-qtju8o/view?usp=drive_link">Adobe After effects</a> <br>
+            <a href="https://drive.google.com/file/d/1BZtLEioN1agmxVq8jed-_hjQGygwkkJx/view?usp=drive_link">Adobe Photoshop</a> <br>
+            <a href="https://drive.google.com/file/d/1ZN0_-oCYZLLW3EbHLAbi2WW05_8QvsX4/view?usp=drive_link">Davinci Resolve 18</a> <br>
+            <a href="https://drive.google.com/file/d/1ElhFbuMNu0mu3IXDCOz2-8nPdpt79v9v/view?usp=drive_link">Dolby Media Encoder</a> <br>
+            <a href="https://drive.google.com/file/d/1q1C1CJ1vA6wSuPIM8dilgE6MRQWIbp4I/view?usp=drive_link">CyberLink PowerDirector Ultimate 17 (zvládá BD authoring s DTS audiem)</a> <br>
+            <a href="https://drive.google.com/file/d/1iK2fxr8LMxLI0lf9kRIstNSD3P_EpxVO/view?usp=drive_link">DTS:X Encoder Suite (pouze pro mac)</a> <br>
+            <a href="https://drive.google.com/file/d/1hY4tSGo83p0rwOV1e47LsIIpubs4W-gJ/view?usp=drive_link">Herní videa pro pobavení</a> <br>
         </div>
 
-        <div class="category">
-            <h3><span style="color: var(--accent); font-family: 'Fira Code', monospace;">></span> Software & Nástroje</h3>
-            <div class="soubory">
-                <a href="https://drive.google.com/file/d/1mFYmLob1cbauOaszqxaUAUebi0iqzteM/view?usp=drive_link">Adobe Premiere Pro</a>
-                <a href="https://drive.google.com/file/d/1CZwihP8Y7EolMs3dKRqJaDot4-qtju8o/view?usp=drive_link">Adobe After Effects</a>
-                <a href="https://drive.google.com/file/d/1BZtLEioN1agmxVq8jed-_hjQGygwkkJx/view?usp=drive_link">Adobe Photoshop</a>
-                <a href="https://drive.google.com/file/d/1ZN0_-oCYZLLW3EbHLAbi2WW05_8QvsX4/view?usp=drive_link">DaVinci Resolve 18</a>
-                <a href="https://drive.google.com/file/d/1ElhFbuMNu0mu3IXDCOz2-8nPdpt79v9v/view?usp=drive_link">Dolby Media Encoder</a>
-                <a href="https://drive.google.com/file/d/1q1C1CJ1vA6wSuPIM8dilgE6MRQWIbp4I/view?usp=drive_link">CyberLink PowerDirector 17 (BD authoring + DTS)</a>
-                <a href="https://drive.google.com/file/d/1iK2fxr8LMxLI0lf9kRIstNSD3P_EpxVO/view?usp=drive_link">DTS:X Encoder Suite (macOS only)</a>
-                <a href="https://drive.google.com/file/d/1hY4tSGo83p0rwOV1e47LsIIpubs4W-gJ/view?usp=drive_link">📂 Herní videa pro pobavení</a>
-            </div>
-        </div>
+        <br>
+        <br>
 
-        <div class="category">
-            <h3><span style="color: var(--accent); font-family: 'Fira Code', monospace;">></span> Linux ISO Images</h3>
-            <div class="soubory">
-                <a href="https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Current.iso">🟢 openSUSE Tumbleweed (Daily Driver)</a>
-                <a href="https://archlinux.nic.cz/archlinux/iso/2025.12.01/archlinux-2025.12.01-x86_64.iso">🔵 Arch Linux</a>
-                <a href="https://cdimage.kali.org/kali-2025.4/kali-linux-2025.4-installer-netinst-amd64.iso">🐲 Kali Linux</a>
-                <a href="https://cz.releases.ubuntu.com/24.04.3/ubuntu-24.04.3-desktop-amd64.iso">🟠 Ubuntu 24.04.03 LTS</a>
-                <a href="https://linuxmint.nic.cz/linuxmint-cd/stable/22.2/linuxmint-22.2-cinnamon-64bit.iso">🍃 Linux Mint 22.2 (Doporučeno pro začátečníky)</a>
-                <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.2.0-amd64-netinst.iso">🌀 Debian 13.2</a>
-            </div>
-            
-            <div style="margin-top: 20px; text-align: right;">
-                <a href="linux.html" class="btn">Zobrazit příkazy pro terminál →</a>
-            </div>
+        <div class="linux">
+            <h2 class="nadpis-linux">Linux "věci"</h2>
+            <br>
+            <a href="https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Current.iso">openSUSE Tumbleweed (moje momentálně používaná distribuce)</a> <br>
+            <a href="https://archlinux.nic.cz/archlinux/iso/2025.12.01/archlinux-2025.12.01-x86_64.iso">Arch Linux</a> <br>
+            <a href="https://cdimage.kali.org/kali-2025.4/kali-linux-2025.4-installer-netinst-amd64.iso">Kali Linux</a> <br>
+            <a href="https://cz.releases.ubuntu.com/24.04.3/ubuntu-24.04.3-desktop-amd64.iso">Ubuntu 24.04.03 LTS</a> <br>
+            <a href="https://linuxmint.nic.cz/linuxmint-cd/stable/22.2/linuxmint-22.2-cinnamon-64bit.iso">Linux Mint 22.2 Cinnamon Edition (plná a ověřená verze)(dobré pro přechod z Windows na Linux)</a> <br>
+            <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.2.0-amd64-netinst.iso">Debian 13.2</a> <br>
+            <br>
+            <button class="btn" onclick="window.location.href='linux.html'">Příkazy do Linuxu</button>
         </div>
-
     </div>
 </body>
 </html>
+
+
+
+
