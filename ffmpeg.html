@@ -75,44 +75,26 @@
             <div class="category">
                 <h3 style="color: #cba6f7;">Dolby Vision: Profil 7 na Profil 8.1 (MP4)</h3>
                 <p style="color: var(--text-muted); margin-bottom: 10px;">
-                    Tento proces odstraňuje redundantní metadata z Profilu 7, nastavuje čistý Profil 8.1 (zpětně kompatibilní s HDR10), generuje správné časové značky (PTS) a zajišťuje korektní zápis certifikované hlavičky do kontejneru MP4[cite: 1].
+                    Tento proces odstraňuje redundantní metadata z Profilu 7, nastavuje čistý Profil 8.1 (zpětně kompatibilní s HDR10), generuje správné časové značky (PTS) a zajišťuje korektní zápis certifikované hlavičky do kontejneru MP4.
                 </p>
                 
                 <div class="warning-box" style="padding: 15px; margin-bottom: 15px; border-radius: 8px;">
                     <strong style="color: var(--warning);">Příprava pracovního prostředí:</strong><br>
-                    Ve vyhrazené složce (např. <code>C:\DV_Oprava\</code>) musíte mít zdrojový <code>film.mp4</code>[cite: 2]. Dále si připravte soubor <code>edit.json</code> obsahující <code>{ "mode": 2 }</code>[cite: 5]. Otevřete příkazový řádek v tomto umístění.<br><br>
-                    <strong style="color: var(--danger);">Důležité upozornění:</strong> K tomuto postupu potřebujete <code>dovi_tool.exe</code> (nástroj pro manipulaci s metadaty Dolby Vision)  a <code>mp4muxer.exe</code> (oficiální multiplexer společnosti Dolby). <strong>Jedná se o samostatné programy a nejsou součástí FFmpeg!</strong> Každý krok je nutné nechat kompletně dokončit před spuštěním dalšího[cite: 6].
+                    Ve vyhrazené složce (např. <code>C:\DV_Oprava\</code>) musíte mít zdrojový <code>film.mp4</code>. Dále si připravte soubor <code>edit.json</code> obsahující <code>{ "mode": 2 }</code>. Otevřete příkazový řádek v tomto umístění.<br><br>
+                    <strong style="color: var(--danger);">Důležité upozornění:</strong> K tomuto postupu potřebujete <code>dovi_tool.exe</code> (nástroj pro manipulaci s metadaty Dolby Vision) a <code>mp4muxer.exe</code> (oficiální multiplexer společnosti Dolby). <strong>Jedná se o samostatné programy a nejsou součástí FFmpeg!</strong> Každý krok je nutné nechat kompletně dokončit před spuštěním dalšího.
                 </div>
 
                 <ul class="command-list">
-                    <li>
-                        <span class="prompt">&gt;</span> <code>.\ffmpeg.exe -i film.mp4 -c:v copy -bsf:v hevc_mp4toannexb video.hevc</code><br>
-                        <span class="comment"># 1. Demultiplexing: Vyjme z MP4 kontejneru čistý HEVC stream bez zvukových a titulkových stop[cite: 7, 8].</span>
-                    </li>
-                    <li>
-                        <span class="prompt">&gt;</span> <code>.\dovi_tool.exe extract-rpu video.hevc -o RPU.bin</code><br>
-                        <span class="comment"># 2. Extrakce RPU: Analyzuje surový video stream a extrahuje z něj stávající metadata do samostatného souboru[cite: 9].</span>
-                    </li>
-                    <li>
-                        <span class="prompt">&gt;</span> <code>.\dovi_tool.exe editor -i RPU.bin -j edit.json -o RPU_p8.bin</code><br>
-                        <span class="comment"># 3. Konverze metadat: Na základě edit.json proběhne modifikace metadat na čistý Profil 8 s kompatibilitou pro základní vrstvu HDR10[cite: 10].</span>
-                    </li>
-                    <li>
-                        <span class="prompt">&gt;</span> <code>.\dovi_tool.exe inject-rpu -i video.hevc --rpu-in RPU_p8.bin -o video_p8.hevc</code><br>
-                        <span class="comment"># 4. Injekce metadat: Přepíše původní metadata ve video streamu těmi nově vygenerovanými[cite: 11].</span>
-                    </li>
-                    <li>
-                        <span class="prompt">&gt;</span> <code>.\mp4muxer.exe -i video_p8.hevc -o video_ciste.mp4 --dv-profile 8.1 --dv-bl-compatible-id 1</code><br>
-                        <span class="comment"># 5. MP4 Muxing: Zabalení upraveného surového videa pomocí oficiálního nástroje. Tento krok zajistí správné časování (PTS) a striktně definovanou hlavičku Dolby Vision Profilu 8.1 (s identifikátorem kompatibility 1 pro HDR10)[cite: 12, 13].</span>
-                    </li>
-                    <li>
-                        <span class="prompt">&gt;</span> <code>.\ffmpeg.exe -i video_ciste.mp4 -i film.mp4 -map 0:v -map 1:a -map 1:s? -c copy -strict -2 film_hotovo.mp4</code><br>
-                        <span class="comment"># 6. Remultiplexing: Spojení nově vytvořeného obrazu se zvukovými a titulkovými stopami ze zdrojového souboru[cite: 14, 15, 16]. Parametr -strict -2 umožňuje integraci formátů, které nejsou pro MP4 standardizovány (např. Dolby TrueHD)[cite: 14].</span>
-                    </li>
+                    <li><span class="prompt">&gt;</span> <code>ffmpeg -i film.mp4 -c:v copy -bsf:v hevc_mp4toannexb video.hevc</code><br><span class="comment"># 1. Demultiplexing: Vyjme z MP4 kontejneru čistý HEVC stream bez zvukových a titulkových stop.</span></li>
+                    <li><span class="prompt">&gt;</span> <code>.\dovi_tool.exe extract-rpu video.hevc -o RPU.bin</code><br><span class="comment"># 2. Extrakce RPU: Analyzuje surový video stream a extrahuje z něj stávající metadata do samostatného souboru.</span></li>
+                    <li><span class="prompt">&gt;</span> <code>.\dovi_tool.exe editor -i RPU.bin -j edit.json -o RPU_p8.bin</code><br><span class="comment"># 3. Konverze metadat: Na základě edit.json proběhne modifikace metadat na čistý Profil 8 s kompatibilitou pro základní vrstvu HDR10.</span></li>
+                    <li><span class="prompt">&gt;</span> <code>.\dovi_tool.exe inject-rpu -i video.hevc --rpu-in RPU_p8.bin -o video_p8.hevc</code><br><span class="comment"># 4. Injekce metadat: Přepíše původní metadata ve video streamu těmi nově vygenerovanými.</span></li>
+                    <li><span class="prompt">&gt;</span> <code>.\mp4muxer.exe -i video_p8.hevc -o video_ciste.mp4 --dv-profile 8.1 --dv-bl-compatible-id 1</code><br><span class="comment"># 5. MP4 Muxing: Zabalení upraveného surového videa pomocí oficiálního nástroje. Tento krok zajistí správné časování (PTS) a striktně definovanou hlavičku Dolby Vision Profilu 8.1 (s identifikátorem kompatibility 1 pro HDR10).</span></li>
+                    <li><span class="prompt">&gt;</span> <code>ffmpeg -i video_ciste.mp4 -i film.mp4 -map 0:v -map 1:a -map 1:s? -c copy -strict -2 film_hotovo.mp4</code><br><span class="comment"># 6. Remultiplexing: Spojení nově vytvořeného obrazu se zvukovými a titulkovými stopami ze zdrojového souboru. Parametr -strict -2 umožňuje integraci formátů, které nejsou pro MP4 standardizovány (např. Dolby TrueHD).</span></li>
                 </ul>
 
                 <p style="color: var(--success); margin-top: 15px; font-size: 0.9rem;">
-                    <strong>Závěr a úklid:</strong> Výsledný soubor <code>film_hotovo.mp4</code> je nyní plně kompatibilní a připravený k přehrávání. Pomocné soubory (video.hevc, RPU.bin, RPU_p8.bin, video_p8.hevc, video_ciste.mp4) lze následně smazat[cite: 17].
+                    <strong>Závěr a úklid:</strong> Výsledný soubor <code>film_hotovo.mp4</code> je nyní plně kompatibilní a připravený k přehrávání. Pomocné soubory (video.hevc, RPU.bin, RPU_p8.bin, video_p8.hevc, video_ciste.mp4) lze následně smazat.
                 </p>
             </div>
 
